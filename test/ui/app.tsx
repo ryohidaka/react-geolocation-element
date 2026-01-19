@@ -1,13 +1,5 @@
-import './styles.css'
-
-import { Button } from '../../src'
-
 export function App() {
-	return (
-		<main>
-			<Button>Click me</Button>
-		</main>
-	)
+	return <main></main>
 }
 
 export default App
