@@ -16,6 +16,18 @@ export interface GeoLocationProps {
 
 /**
  * React wrapper for the `<geolocation>` element
+ *
+ * @example
+ * ```tsx
+ * <GeoLocation
+ *   autolocate
+ *   accuracymode="precise"
+ *   watch
+ *   onLocation={(pos, err) => {
+ *     if (pos) console.log("Lat:", pos.coords.latitude, "Lng:", pos.coords.longitude)
+ *     if (err) console.error("Error:", err.message)
+ *   }}
+ * />
  */
 export const GeoLocation: React.FC<GeoLocationProps> = ({
 	autolocate = true,
