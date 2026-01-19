@@ -12,15 +12,15 @@ export interface GeoLocationProps {
 		position: GeolocationPosition | null,
 		error?: GeolocationPositionError | null,
 	) => void
+	/** Automatically load the polyfill */
+	usePolyfill?: boolean
 }
 
 /**
  * React wrapper for the `<geolocation>` element
  *
- * Supports progressive enhancement with custom fallback children.
- *
- * Browsers that don't support `<geolocation>` will render its children,
- * while browsers that do support it will ignore them.
+ * - Supports progressive enhancement with custom fallback children.
+ * - Optionally loads a polyfill for unsupported browsers.
  *
  * @example
  * ```tsx
@@ -28,6 +28,7 @@ export interface GeoLocationProps {
  *   autolocate
  *   accuracymode="precise"
  *   watch
+ *   usePolyfill
  *   onLocation={(pos, err) => {
  *     if (pos) console.log("Lat:", pos.coords.latitude, "Lng:", pos.coords.longitude)
  *     if (err) console.error("Error:", err.message)
@@ -44,9 +45,11 @@ export const GeoLocation: React.FC<PropsWithChildren<GeoLocationProps>> = ({
 	accuracymode = 'approximate',
 	watch = true,
 	onLocation,
+	usePolyfill = false,
 	children,
 }) => {
 	const ref = useRef<HTMLElement | null>(null)
+	const initialized = useRef(false)
 
 	const handleLocation = useCallback(
 		(event: Event) => {
@@ -70,10 +73,23 @@ export const GeoLocation: React.FC<PropsWithChildren<GeoLocationProps>> = ({
 			if (ref.current === node) return
 			if (ref.current)
 				ref.current.removeEventListener('location', handleLocation)
-			if (node) node.addEventListener('location', handleLocation)
+
+			if (node) {
+				node.addEventListener('location', handleLocation)
+
+				if (!initialized.current) {
+					initialized.current = true
+					if (usePolyfill) {
+						import('geolocation-element-polyfill').catch((err) =>
+							console.error('[GeoLocation] Failed to load polyfill:', err),
+						)
+					}
+				}
+			}
+
 			ref.current = node
 		},
-		[handleLocation],
+		[handleLocation, usePolyfill],
 	)
 
 	return React.createElement(
