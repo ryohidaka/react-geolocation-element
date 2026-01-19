@@ -67,5 +67,8 @@
 	"simple-git-hooks": {
 		"pre-commit": "bun run lint && bun run type-check"
 	},
-	"types": "./dist/index.d.ts"
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"geolocation-element-polyfill": "^1.0.1"
+	}
 }
