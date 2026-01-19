@@ -17,34 +17,28 @@ npm i react-geolocation-element
 ```tsx
 import GeoLocation from 'react-geolocation-element';
 
-function App() {
-	return (
-		<>
-			<GeoLocation
-				autolocate
-				accuracymode="precise"
-				watch
-				onLocation={(
-					position: GeolocationPosition | null,
-					err?: GeolocationPositionError | null,
-				) => {
-					if (position) {
-						console.log(position);
-					} else if (err) {
-						console.error(err);
-					}
-				}}
-			>
-				<button
-					type="button"
-					onClick={() => navigator.geolocation.getCurrentPosition(console.log)}
-				>
-					Use my location
-				</button>
-			</GeoLocation>
-		</>
-	);
-}
+<GeoLocation
+	autolocate
+	accuracymode="precise"
+	watch
+	onLocation={(
+		position: GeolocationPosition | null,
+		err?: GeolocationPositionError | null,
+	) => {
+		if (position) {
+			console.log(position);
+		} else if (err) {
+			console.error(err);
+		}
+	}}
+>
+	<button
+		type="button"
+		onClick={() => navigator.geolocation.getCurrentPosition(console.log)}
+	>
+		Use my location
+	</button>
+</GeoLocation>
 ```
 
 ## Link
