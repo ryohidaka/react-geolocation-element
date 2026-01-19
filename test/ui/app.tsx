@@ -1,5 +1,11 @@
+import GeoLocation from '../../src'
+
 export function App() {
-	return <main></main>
+	return (
+		<main>
+			<GeoLocation />
+		</main>
+	)
 }
 
 export default App
