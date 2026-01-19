@@ -16,7 +16,14 @@ export function App() {
 					console.error(err)
 				}
 			}}
-		/>
+		>
+			<button
+				type="button"
+				onClick={() => navigator.geolocation.getCurrentPosition(console.log)}
+			>
+				Use my location
+			</button>
+		</GeoLocation>
 	)
 }
 

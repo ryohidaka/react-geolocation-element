@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { type PropsWithChildren, useCallback, useRef } from 'react'
 
 export interface GeoLocationProps {
 	/** Automatically request location if permission is already granted */
@@ -17,6 +17,11 @@ export interface GeoLocationProps {
 /**
  * React wrapper for the `<geolocation>` element
  *
+ * Supports progressive enhancement with custom fallback children.
+ *
+ * Browsers that don't support `<geolocation>` will render its children,
+ * while browsers that do support it will ignore them.
+ *
  * @example
  * ```tsx
  * <GeoLocation
@@ -27,13 +32,19 @@ export interface GeoLocationProps {
  *     if (pos) console.log("Lat:", pos.coords.latitude, "Lng:", pos.coords.longitude)
  *     if (err) console.error("Error:", err.message)
  *   }}
- * />
+ * >
+ *   <button onClick={() => navigator.geolocation.getCurrentPosition(console.log)}>
+ *     Use my location
+ *   </button>
+ * </GeoLocation>
+ * ```
  */
-export const GeoLocation: React.FC<GeoLocationProps> = ({
+export const GeoLocation: React.FC<PropsWithChildren<GeoLocationProps>> = ({
 	autolocate = true,
 	accuracymode = 'approximate',
 	watch = true,
 	onLocation,
+	children,
 }) => {
 	const ref = useRef<HTMLElement | null>(null)
 
@@ -65,10 +76,14 @@ export const GeoLocation: React.FC<GeoLocationProps> = ({
 		[handleLocation],
 	)
 
-	return React.createElement('geolocation', {
-		ref: setRef,
-		autolocate: autolocate ? '' : undefined,
-		accuracymode,
-		watch: watch ? '' : undefined,
-	})
+	return React.createElement(
+		'geolocation',
+		{
+			ref: setRef,
+			autolocate: autolocate ? '' : undefined,
+			accuracymode,
+			watch: watch ? '' : undefined,
+		},
+		children,
+	)
 }
