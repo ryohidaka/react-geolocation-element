@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ryohidaka/react-geolocation-element/compare/v0.1.0...v0.1.1) (2026-01-20)
+
+
+### Miscellaneous Chores
+
+* release 0.1.1 ([58abe00](https://github.com/ryohidaka/react-geolocation-element/commit/58abe00176504153467d49959ff0258e9938487b))
+
 ## 0.1.0 (2026-01-19)
 
 
