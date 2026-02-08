@@ -1,6 +1,7 @@
 # react-geolocation-element
 
 [![NPM Version](https://img.shields.io/npm/v/react-geolocation-element?logo=npm)](https://www.npmjs.com/package/react-geolocation-element)
+[![Built with Bun](https://img.shields.io/badge/Built_with-Bun-fbf0df?logo=bun&labelColor=212121)](https://bun.com)
 [![CI](https://github.com/ryohidaka/react-geolocation-element/actions/workflows/ci.yml/badge.svg)](https://github.com/ryohidaka/react-geolocation-element/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -23,7 +24,7 @@ import GeoLocation from 'react-geolocation-element';
 	watch
 	onLocation={(
 		position: GeolocationPosition | null,
-		err?: GeolocationPositionError | null,
+		err?: GeolocationPositionError | null
 	) => {
 		if (position) {
 			console.log(position);
@@ -38,7 +39,7 @@ import GeoLocation from 'react-geolocation-element';
 	>
 		Use my location
 	</button>
-</GeoLocation>
+</GeoLocation>;
 ```
 
 ## Link
